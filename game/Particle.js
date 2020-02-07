@@ -1,6 +1,6 @@
 class Particle
 {
-    constructor(_x,_y,_targetX,_targetY,_diametre,_oscillationMinimum,_oscillationWidth)
+    constructor(_x,_y,_targetX,_targetY,_diametre,_oscillationMinimum,_oscillationWidth,_finished)
     {
         this.x = _x
         this.y = _y
@@ -9,7 +9,7 @@ class Particle
         this.diametre = _diametre
         this.vectorN = this.x - this.targetX
         this.snoflakeRadius = this.x - this.targetX
-        this.finished = false
+        this.finished = _finished
         this.oscillationMinimum = _oscillationMinimum
         this.oscillationWidth = _oscillationWidth
     }

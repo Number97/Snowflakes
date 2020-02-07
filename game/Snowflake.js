@@ -11,17 +11,17 @@ class Snowflake
         this.oscillationMinimum = _oscillationMinimum
         this.oscillationWidth = _oscillationWidth
         this.current = 0
-        this.snowflakes.push(new Particle(this.diametre/2,0,this.x,this.y,this.flakediametre,this.oscillationMinimum,this.oscillationWidth))
+        this.snowflakes.push(new Particle(this.diametre/2,0,this.x,this.y,this.flakediametre,this.oscillationMinimum,this.oscillationWidth,false))
     }
 
     advance()
     {
-        print(this.snowflakes.length)
-        this.checkContact()
-        if(this.snowflakes[this.current].finished)
+        
+        if(this.checkContact())
         {
+            this.snowflakes[this.current].show()
             this.createMirrors()
-            this.snowflakes.push(new Particle(this.diametre/2,0,this.x,this.y,this.flakediametre,this.oscillationMinimum,this.oscillationWidth))
+            this.snowflakes.push(new Particle(this.diametre/2,0,this.x,this.y,this.flakediametre,this.oscillationMinimum,this.oscillationWidth,false))
             this.current++
         }
         else
@@ -30,19 +30,12 @@ class Snowflake
         }
     }
 
-    show()
-    {
-        for(let i=0;i<this.current+1;i++)
-        {
-            this.snowflakes[i].show()
-        }
-    }
-
     checkContact()
     {
         if((this.snowflakes[this.current].x < this.x))
         {
             this.snowflakes[this.current].finished = true
+            return true
         }
         else
         {
@@ -51,6 +44,7 @@ class Snowflake
                 if((sqrt((this.snowflakes[i].x - this.snowflakes[this.current].x) * (this.snowflakes[i].x - this.snowflakes[this.current].x) + (this.snowflakes[i].y - this.snowflakes[this.current].y) * (this.snowflakes[i].y - this.snowflakes[this.current].y)) < this.flakediametre*2))
                 {
                     this.snowflakes[this.current].finished = true
+                    return true
                 }
             }
         }
@@ -59,17 +53,20 @@ class Snowflake
 
     createMirrors()
     {
-        this.snowflakes.push(new Particle(this.snowflakes[this.current].x,-this.snowflakes[this.current].y,this.x,this.y,this.flakediametre,this.oscillationMinimum,this.oscillationWidth))
+        this.snowflakes.push(new Particle(this.snowflakes[this.current].x,-this.snowflakes[this.current].y,this.x,this.y,this.flakediametre,this.oscillationMinimum,this.oscillationWidth,true))
         this.current++
+        this.snowflakes[this.current].show()
 
         for(let i=0;i<5;i++)
         {
-            this.snowflakes.push(new Particle(this.snowflakes[this.current].x,this.snowflakes[this.current].y,this.x,this.y,this.flakediametre,this.oscillationMinimum,this.oscillationWidth))
+            this.snowflakes.push(new Particle(this.snowflakes[this.current].x,this.snowflakes[this.current].y,this.x,this.y,this.flakediametre,this.oscillationMinimum,this.oscillationWidth,true))
             this.snowflakes[this.current + 2 * (i+1)-1].rotate(PI * (i+1) / 3)
+            this.snowflakes[this.current + 2 * (i+1)-1].show()
 
 
-            this.snowflakes.push(new Particle(this.snowflakes[this.current].x,-this.snowflakes[this.current].y,this.x,this.y,this.flakediametre,this.oscillationMinimum,this.oscillationWidth))
+            this.snowflakes.push(new Particle(this.snowflakes[this.current].x,-this.snowflakes[this.current].y,this.x,this.y,this.flakediametre,this.oscillationMinimum,this.oscillationWidth,true))
             this.snowflakes[this.current + 2 * (i+1)].rotate(PI * (i+1) / 3)
+            this.snowflakes[this.current + 2 * (i+1)].show()
         }
         this.current += 10
     }
