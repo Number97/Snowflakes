@@ -54,7 +54,6 @@ class Snowflake
 
     checkFinished()
     {
-        print(this.snowflakes[this.current].x,this.snowflakes[this.current].y,this.snowflakes[this.current].vectorN,this.diametre)
         if(this.snowflakes[this.current].vectorN >= this.diametre / 2)
         {
             this.finished = true
