@@ -26,7 +26,7 @@ class Particle
 
     show()
     {
-        fill(255)
+        fill(random(123,255))
         noStroke()
         circle(this.x,this.y,this.diametre)
     }

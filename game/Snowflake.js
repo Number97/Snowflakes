@@ -44,11 +44,21 @@ class Snowflake
                 if((sqrt((this.snowflakes[i].x - this.snowflakes[this.current].x) * (this.snowflakes[i].x - this.snowflakes[this.current].x) + (this.snowflakes[i].y - this.snowflakes[this.current].y) * (this.snowflakes[i].y - this.snowflakes[this.current].y)) < this.flakediametre*2))
                 {
                     this.snowflakes[this.current].finished = true
+                    this.checkFinished()
                     return true
                 }
             }
         }
         
+    }
+
+    checkFinished()
+    {
+        print(this.snowflakes[this.current].x,this.snowflakes[this.current].y,this.snowflakes[this.current].vectorN,this.diametre)
+        if(this.snowflakes[this.current].vectorN >= this.diametre / 2)
+        {
+            this.finished = true
+        }
     }
 
     createMirrors()
