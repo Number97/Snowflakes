@@ -1,6 +1,6 @@
 class Particle
 {
-    constructor(_x,_y,_targetX,_targetY,_diametre,_oscillationMinimum,_oscillationWidth,_finished)
+    constructor(_x,_y,_targetX,_targetY,_diametre,_oscillationMinimum,_oscillationWidth,_finished,_style)
     {
         this.x = _x
         this.y = _y
@@ -12,6 +12,7 @@ class Particle
         this.finished = _finished
         this.oscillationMinimum = _oscillationMinimum
         this.oscillationWidth = _oscillationWidth
+        this.style = _style
     }
 
     move()
@@ -26,8 +27,29 @@ class Particle
 
     show()
     {
-        fill(random(123,255))
-        noStroke()
+        switch(this.style)
+        {
+            case 1:
+                fill(255)
+                noStroke()
+                break;
+
+            case 2:
+                fill(random(123,255))
+                noStroke()
+                break;
+        
+            case 3:
+                fill(random(0,255))
+                stroke(255)
+                strokeWeight(1)
+                break;
+
+            case 4:
+                fill(random(0,255),random(0,255),random(0,255))
+                noStroke()
+                break;
+        }
         circle(this.x,this.y,this.diametre)
     }
 
